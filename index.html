@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VA Academy — ИИ-ассистенты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #EAECF0;
+            --bg-dark: #E3E5EA;
+            --text-primary: #1B1F3B;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --nav-active: #1B1F3B;
+            --white: #FFFFFF;
+            --card-bg: #F3F4F6;
+            --border: #D1D5DB;
+            --green: #16A34A;
+            --red: #DC2626;
+            --accent-blue: #A5B4C4;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Manrope',sans-serif; background:var(--bg); color:var(--text-primary); line-height:1.6; overflow-x:hidden; }
+
+        /* ── Header ── */
+        .header { position:fixed; top:0; left:0; right:0; z-index:100; padding:24px 60px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(12px); background:rgba(234,236,240,0.8); }
+        .logo { display:flex; flex-direction:column; }
+        .logo-top { font-size:16px; font-weight:800; letter-spacing:1px; text-transform:uppercase; line-height:1; }
+        .logo-bottom { font-size:10px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:var(--text-secondary); }
+        .nav { background:var(--white); border-radius:50px; padding:6px; display:flex; gap:2px; }
+        .nav a { text-decoration:none; color:#374151; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:12px 24px; border-radius:50px; transition:all .3s; }
+        .nav a:hover { color:var(--text-primary); }
+        .nav a.active { background:var(--nav-active); color:var(--white); }
+        .menu-btn { width:40px; height:40px; display:none; flex-direction:column; justify-content:center; gap:6px; cursor:pointer; }
+        .menu-btn span { width:24px; height:2px; background:var(--text-primary); border-radius:2px; }
+
+        /* ── Section ── */
+        .section { min-height:100vh; padding:100px 60px 60px; display:flex; align-items:center; position:relative; }
+        .section-inner { max-width:1400px; width:100%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+        section[id] { scroll-margin-top:80px; }
+
+        /* ── Typography ── */
+        .h1 { font-size:48px; font-weight:800; line-height:1.1; }
+        .h2 { font-size:60px; font-weight:900; line-height:1.1; margin-bottom:20px; }
+        .subtitle { font-size:12px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:24px; }
+        .body-text { font-size:16px; line-height:1.6; max-width:540px; }
+
+        /* ── CTA Button ── */
+        .cta-btn { display:inline-flex; align-items:center; gap:12px; background:var(--card-bg); border:1px solid var(--border); border-radius:50px; padding:12px 24px; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-primary); cursor:pointer; transition:all .3s; text-decoration:none; margin-top:28px; }
+        .cta-btn:hover { background:var(--white); box-shadow:0 4px 20px rgba(27,31,59,.08); }
+        .cta-btn .circle { width:24px; height:24px; background:var(--nav-active); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+        .cta-btn .circle svg { width:12px; height:12px; stroke:var(--white); stroke-width:2; fill:none; }
+
+        /* ── Tags ── */
+        .tags { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+        .tag { background:var(--white); border:1px solid var(--border); border-radius:50px; padding:8px 14px; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
+
+        /* ── Image Card ── */
+        .image-card { position:relative; border-radius:24px; overflow:hidden; box-shadow:0 20px 60px rgba(27,31,59,.1); }
+        .image-card img { width:100%; height:auto; display:block; }
+
+        /* ── Decorative ── */
+        .asterisk { position:absolute; font-size:60px; color:var(--accent-blue); opacity:.5; line-height:1; pointer-events:none; }
+
+        /* ── Cards List ── */
+        .cards-list { display:flex; flex-direction:column; margin-top:24px; }
+        .card-item { display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); }
+        .card-item:last-child { border-bottom:none; }
+        .card-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+        .card-icon.blue { background:#EEF2FF; }
+        .card-icon.green { background:#ECFDF5; }
+        .card-icon.orange { background:#FFF7ED; }
+        .card-icon.purple { background:#F5F3FF; }
+        .card-content h3 { font-size:17px; font-weight:700; margin-bottom:4px; }
+        .card-content p { font-size:14px; color:var(--text-secondary); line-height:1.4; }
+
+        /* ── Comparison Table ── */
+        .comparison-table { width:100%; margin-top:24px; border-collapse:collapse; }
+        .comparison-table th { text-align:left; padding:10px 12px; font-size:13px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; }
+        .comparison-table th:last-child { color:var(--text-primary); font-weight:800; }
+        .comparison-table td { padding:10px 12px; font-size:15px; }
+        .comparison-table tr:nth-child(even) { background:rgba(243,244,246,.5); }
+        .comparison-table .feature { font-weight:600; }
+        .comparison-table .negative { color:var(--red); font-weight:500; }
+        .comparison-table .positive { color:var(--green); font-weight:500; }
+
+        /* ── Feature Tags ── */
+        .feature-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:20px; }
+        .feature-tag { background:var(--white); border:1px solid var(--border); border-radius:50px; padding:6px 12px; font-size:12px; font-weight:500; display:flex; align-items:center; gap:4px; }
+
+        /* ── Checklist ── */
+        .checklist { list-style:none; margin-top:24px; }
+        .checklist li { display:flex; align-items:flex-start; gap:12px; padding:8px 0; font-size:15px; }
+        .checklist .check { width:20px; height:20px; background:var(--nav-active); border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+        .checklist .check svg { width:12px; height:12px; stroke:var(--white); stroke-width:2; fill:none; }
+
+        /* ── Price Card ── */
+        .pricing-col { position:relative; }
+        .price-card { background:var(--white); border-radius:16px; padding:24px; border:1px solid var(--border); position:absolute; bottom:-16px; right:-16px; box-shadow:0 10px 40px rgba(27,31,59,.1); z-index:5; }
+        .price { font-size:40px; font-weight:900; line-height:1; }
+        .price-note { font-size:14px; color:var(--text-secondary); margin-top:4px; }
+
+        /* ── Test Badge ── */
+        .test-badge { position:absolute; top:40px; right:40px; background:var(--nav-active); color:var(--white); padding:16px 24px; border-radius:16px; text-align:center; z-index:10; }
+        .test-badge .label { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; display:flex; align-items:center; gap:8px; justify-content:center; }
+        .test-badge .value { font-size:16px; margin-top:4px; }
+
+        /* ── Contact ── */
+        .contact-cards { display:flex; flex-direction:column; gap:16px; margin-top:32px; }
+        .contact-card { display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit; }
+        .contact-icon { width:56px; height:56px; background:var(--text-primary); border-radius:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .contact-icon svg { width:28px; height:28px; fill:var(--white); }
+        .contact-info .label { font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+        .contact-info .value { font-size:18px; font-weight:700; }
+
+        /* ── Footer ── */
+        .footer { text-align:center; padding:40px 24px; font-size:14px; color:var(--text-muted); }
+
+        /* ── Responsive ── */
+        @media(max-width:1200px) {
+            .header { padding:20px 40px; }
+            .section { padding:100px 40px 60px; }
+            .section-inner { gap:60px; }
+            .h1 { font-size:44px; }
+            .h2 { font-size:56px; }
+        }
+        @media(max-width:900px) {
+            .section-inner { grid-template-columns:1fr; gap:40px; }
+            .image-card, .pricing-col { max-width:500px; margin:0 auto; }
+            .nav { display:none; }
+            .menu-btn { display:flex; }
+            .h1 { font-size:36px; }
+            .h2 { font-size:48px; }
+        }
+        @media(max-width:600px) {
+            .header { padding:16px 24px; }
+            .section { padding:80px 24px 40px; min-height:auto; }
+            .h1 { font-size:28px; }
+            .h2 { font-size:36px; }
+            .body-text { font-size:16px; }
+            .price-card { position:relative; bottom:auto; right:auto; margin-top:24px; }
+            .test-badge { position:relative; top:auto; right:auto; margin-bottom:24px; display:inline-block; }
+            .comparison-table td, .comparison-table th { padding:10px 8px; font-size:14px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="logo">
+        <span class="logo-top">VA</span>
+        <span class="logo-bottom">ACADEMY</span>
+    </div>
+    <nav class="nav">
+        <a href="#hero" class="active">Главная</a>
+        <a href="#about">О нас</a>
+        <a href="#who">Кому</a>
+        <a href="#features">Возможности</a>
+        <a href="#pricing">Цены</a>
+        <a href="#contact">Контакты</a>
+    </nav>
+    <div class="menu-btn"><span></span><span></span></div>
+</header>
+
+<!-- 1. Hero -->
+<section id="hero" class="section">
+    <span class="asterisk" style="top:15%;right:35%">✦</span>
+    <div class="section-inner">
+        <div>
+            <h1 class="h1">Ваш ИИ-ассистент</h1>
+            <h2 class="h2">для бизнеса</h2>
+            <p class="body-text">Персональный помощник, который закрывает задачи программиста, дизайнера, аналитика и коуча. Работает прямо в вашем мессенджере 24/7.</p>
+            <a href="#about" class="cta-btn">
+                Узнать больше
+                <span class="circle"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+            <div class="tags">
+                <span class="tag">● Telegram & WhatsApp</span>
+                <span class="tag">● Zoom обучение</span>
+                <span class="tag">● Комьюнити</span>
+            </div>
+        </div>
+        <div class="image-card">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="AI">
+        </div>
+    </div>
+</section>
+
+<!-- 2. About -->
+<section id="about" class="section">
+    <span class="asterisk" style="top:10%;left:15%">✦</span>
+    <div class="section-inner">
+        <div>
+            <h1 class="h1">Что мы</h1>
+            <h2 class="h2">делаем?</h2>
+            <p class="subtitle">КОМПЛЕКСНОЕ ВНЕДРЕНИЕ ИИ</p>
+            <p class="body-text" style="margin-bottom:24px">Мы разрабатываем индивидуального ассистента, который знает историю вашей компании, ваши цели и задачи. Помогаем управлять им, обучаем сотрудников и внедряем под ключ.</p>
+            <p class="body-text">Обучение в живом и записанном формате. Еженедельные Zoom-встречи с разбором вопросов. Чат-комьюнити для предпринимателей с уроками по настройке ассистента.</p>
+            <a href="#who" class="cta-btn">
+                Кому подходит
+                <span class="circle"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+        </div>
+        <div class="image-card">
+            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Robot">
+        </div>
+    </div>
+</section>
+
+<!-- 3. Who -->
+<section id="who" class="section">
+    <div class="section-inner">
+        <div>
+            <h1 class="h1">Кому подходит</h1>
+            <h2 class="h2">ИИ-ассистент?</h2>
+            <p class="subtitle">ОДИН ПОМОЩНИК ВМЕСТО ЦЕЛОЙ КОМАНДЫ</p>
+            <div class="cards-list">
+                <div class="card-item">
+                    <div class="card-icon blue">📋</div>
+                    <div class="card-content">
+                        <h3>Блогеры и эксперты</h3>
+                        <p>Посты, сценарии, карусели, Reels в вашем стиле. Экономия 3–5 часов ежедневно</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon green">📊</div>
+                    <div class="card-content">
+                        <h3>Предприниматели</h3>
+                        <p>Финмодели, сметы, анализ рынка, проверка цен. За минуты, не за дни</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon orange">👨‍💼</div>
+                    <div class="card-content">
+                        <h3>Руководители</h3>
+                        <p>Отчёты, аналитика, планирование, стратегия. Рутина уходит, фокус на росте</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon purple">🏢</div>
+                    <div class="card-content">
+                        <h3>Малый и средний бизнес</h3>
+                        <p>Программист, дизайнер, аналитик, коуч. Один ассистент на все задачи</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="image-card">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robot">
+        </div>
+    </div>
+</section>
+
+<!-- 4. Features -->
+<section id="features" class="section">
+    <span class="asterisk" style="top:20%;right:20%">✦</span>
+    <div class="section-inner">
+        <div>
+            <h1 class="h1">Возможности</h1>
+            <h2 class="h2">ассистента</h2>
+            <p class="subtitle">ЧТО ОТЛИЧАЕТ НАС ОТ CHATGPT</p>
+            <table class="comparison-table">
+                <thead><tr><th></th><th>ChatGPT</th><th>Наш ассистент</th></tr></thead>
+                <tbody>
+                    <tr><td class="feature">Память</td><td class="negative">Забывает контекст</td><td class="positive">Помнит всё о вас</td></tr>
+                    <tr><td class="feature">Настройка</td><td class="negative">Одинаковый для всех</td><td class="positive">Знает ваш бизнес</td></tr>
+                    <tr><td class="feature">Где работает</td><td class="negative">Браузер / приложение</td><td class="positive">Telegram, WhatsApp</td></tr>
+                    <tr><td class="feature">Обучение</td><td class="negative">Нет</td><td class="positive">Zoom + комьюнити</td></tr>
+                    <tr><td class="feature">Действия</td><td class="negative">Только текст</td><td class="positive">Файлы, картинки, видео</td></tr>
+                    <tr><td class="feature">Обучаемость</td><td class="negative">Каждый раз с нуля</td><td class="positive">Учится и запоминает</td></tr>
+                </tbody>
+            </table>
+            <div class="feature-tags">
+                <span class="feature-tag">📊 Финмодели</span>
+                <span class="feature-tag">🎬 Видео</span>
+                <span class="feature-tag">📁 Контент</span>
+                <span class="feature-tag">🖼 Картинки</span>
+                <span class="feature-tag">🌐 Сайты</span>
+                <span class="feature-tag">📱 Приложения</span>
+                <span class="feature-tag">🔍 Аналитика</span>
+                <span class="feature-tag">📄 Документы</span>
+            </div>
+        </div>
+        <div class="image-card">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="AI Work">
+        </div>
+    </div>
+</section>
+
+<!-- 5. Pricing -->
+<section id="pricing" class="section">
+    <span class="asterisk" style="top:25%;left:10%">✦</span>
+    <div class="section-inner">
+        <div>
+            <h1 class="h1">Что входит</h1>
+            <h2 class="h2">в подписку</h2>
+            <p class="subtitle">ВСЁ ВКЛЮЧЕНО</p>
+            <ul class="checklist">
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Персональный ИИ-ассистент для вашего бизнеса</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Работа с текстом, расчётами, документами</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Генерация изображений и презентаций</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Генерация видео и визуального контента</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Создание приложений, сайтов и автоматизаций</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Анализ конкурентов и рынка</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Еженедельное обучение по Zoom</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Чат-комьюнити с уроками</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Поддержка и консультации 24/7</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">● Дешевле одного сотрудника</span>
+                <span class="tag">● 24/7 без выходных</span>
+            </div>
+        </div>
+        <div class="pricing-col">
+            <div class="test-badge">
+                <div class="label"><span>🎯</span> ТЕСТ</div>
+                <div class="value">12 часов бесплатно</div>
+            </div>
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=800&q=80" alt="AI Brain">
+            </div>
+            <div class="price-card">
+                <div class="price">30 000 ₽</div>
+                <div class="price-note">в месяц</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Contact -->
+<section id="contact" class="section">
+    <span class="asterisk" style="top:15%;right:15%">✦</span>
+    <span class="asterisk" style="bottom:25%;left:10%">✦</span>
+    <div class="section-inner">
+        <div>
+            <h1 class="h1">Спасибо!</h1>
+            <h2 class="h2">Контакты</h2>
+            <p class="body-text" style="margin-bottom:16px">Этот лендинг создал мой ИИ-ассистент.</p>
+            <p class="body-text" style="font-weight:700;font-size:20px">Удачного дня!</p>
+            <div class="contact-cards">
+                <a href="tel:+79202669966" class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></svg>
+                    </div>
+                    <div class="contact-info">
+                        <div class="label">Телефон</div>
+                        <div class="value">+7 (920) 266-99-66</div>
+                    </div>
+                </a>
+                <a href="https://t.me/vardges" class="contact-card" target="_blank">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.2-.04-.28-.02-.12.02-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.5 1.04-.78 4.07-1.77 6.79-2.94 8.15-3.5 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/></svg>
+                    </div>
+                    <div class="contact-info">
+                        <div class="label">Telegram</div>
+                        <div class="value">@vardges</div>
+                    </div>
+                </a>
+                <a href="https://t.me/vardges" class="contact-card" target="_blank">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <div class="contact-info">
+                        <div class="label">Комьюнити</div>
+                        <div class="value">Чат для предпринимателей</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="image-card">
+            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80" alt="AI Future">
+        </div>
+    </div>
+</section>
+
+<footer class="footer">© 2026 VA Academy — ИИ-ассистенты</footer>
+
+<!-- Active Nav Highlight -->
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
