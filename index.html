@@ -28,9 +28,9 @@
 
         /* ── Header ── */
         .header { position:fixed; top:0; left:0; right:0; z-index:100; padding:24px 60px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(12px); background:rgba(234,236,240,0.8); }
-        .logo { display:flex; align-items:center; gap:10px; }
-        .logo img { height:40px; width:auto; }
-        .logo-text { font-size:18px; font-weight:800; letter-spacing:1px; }
+        .logo { display:flex; flex-direction:column; }
+        .logo-top { font-size:16px; font-weight:800; letter-spacing:1px; text-transform:uppercase; line-height:1; }
+        .logo-bottom { font-size:10px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:var(--text-secondary); }
         .nav { background:var(--white); border-radius:50px; padding:6px; display:flex; gap:2px; }
         .nav a { text-decoration:none; color:#374151; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:12px 24px; border-radius:50px; transition:all .3s; }
         .nav a:hover { color:var(--text-primary); }
@@ -153,8 +153,7 @@
 <!-- Header -->
 <header class="header">
     <div class="logo">
-        <img src="logo.jpg" alt="VAcademy">
-        <span class="logo-text">VAcademy</span>
+        <span class="logo-top">VAcademy</span>
     </div>
     <nav class="nav">
         <a href="#hero" class="active">Главная</a>
