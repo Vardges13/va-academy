@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAcademy — ИИ-ассистенты</title>
+    <title>VAcademy — ИИ-ассистент для бизнеса | Персональный AI-помощник в Telegram</title>
+    <meta name="description" content="Персональный ИИ-ассистент для бизнеса: задачи программиста, дизайнера, аналитика и коуча в одном мессенджере 24/7. Тарифы от 25 000 ₽/мес. Тест-драйв 12 часов бесплатно.">
+    <meta name="keywords" content="ИИ ассистент, AI помощник, искусственный интеллект для бизнеса, Telegram бот, автоматизация бизнеса, ChatGPT альтернатива">
+    <meta name="author" content="VAcademy">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VAcademy — ИИ-ассистент для бизнеса">
+    <meta property="og:description" content="Персональный AI-помощник, который заменяет целую команду. Работает в Telegram и WhatsApp 24/7.">
+    <meta property="og:url" content="https://vardges13.github.io/va-academy/">
+    <meta property="og:image" content="https://vardges13.github.io/va-academy/logo.jpg">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "VAcademy — ИИ-ассистент для бизнеса",
+      "description": "Персональный AI-помощник для бизнеса: программист, дизайнер, аналитик и коуч в одном мессенджере",
+      "provider": {
+        "@type": "Organization",
+        "name": "VAcademy",
+        "url": "https://vardges13.github.io/va-academy/"
+      },
+      "areaServed": "RU",
+      "serviceType": "AI-ассистент для бизнеса",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "25000",
+        "highPrice": "200000",
+        "priceCurrency": "RUB",
+        "offerCount": "3"
+      }
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #EAECF0;
@@ -21,6 +58,7 @@
             --green: #16A34A;
             --red: #DC2626;
             --accent-blue: #A5B4C4;
+            --accent-gold: #D97706;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
@@ -32,7 +70,7 @@
         .logo-top { font-size:16px; font-weight:800; letter-spacing:1px; text-transform:uppercase; line-height:1; }
         .logo-bottom { font-size:10px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:var(--text-secondary); }
         .nav { background:var(--white); border-radius:50px; padding:6px; display:flex; gap:2px; }
-        .nav a { text-decoration:none; color:#374151; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:12px 24px; border-radius:50px; transition:all .3s; }
+        .nav a { text-decoration:none; color:#374151; font-size:12px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:12px 18px; border-radius:50px; transition:all .3s; }
         .nav a:hover { color:var(--text-primary); }
         .nav a.active { background:var(--nav-active); color:var(--white); }
         .menu-btn { width:40px; height:40px; display:none; flex-direction:column; justify-content:center; gap:6px; cursor:pointer; }
@@ -43,10 +81,16 @@
         .section-inner { max-width:1400px; width:100%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
         section[id] { scroll-margin-top:80px; }
 
+        /* ── Full-width Section (for new sections) ── */
+        .section-full { min-height:auto; padding:100px 60px 80px; }
+        .section-full .section-inner { display:block; }
+
         /* ── Typography ── */
         .h1 { font-size:48px; font-weight:800; line-height:1.1; }
         .h2 { font-size:60px; font-weight:900; line-height:1.1; margin-bottom:20px; }
+        .h2-center { font-size:60px; font-weight:900; line-height:1.1; text-align:center; margin-bottom:16px; }
         .subtitle { font-size:12px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:24px; }
+        .subtitle-center { font-size:12px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:40px; text-align:center; }
         .body-text { font-size:16px; line-height:1.6; max-width:540px; }
 
         /* ── CTA Button ── */
@@ -54,6 +98,9 @@
         .cta-btn:hover { background:var(--white); box-shadow:0 4px 20px rgba(27,31,59,.08); }
         .cta-btn .circle { width:24px; height:24px; background:var(--nav-active); border-radius:50%; display:flex; align-items:center; justify-content:center; }
         .cta-btn .circle svg { width:12px; height:12px; stroke:var(--white); stroke-width:2; fill:none; }
+
+        .cta-btn-dark { display:inline-flex; align-items:center; gap:10px; background:var(--nav-active); color:var(--white); border:none; border-radius:50px; padding:14px 32px; font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all .3s; text-decoration:none; margin-top:32px; }
+        .cta-btn-dark:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(27,31,59,.2); }
 
         /* ── Tags ── */
         .tags { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
@@ -98,11 +145,53 @@
         .checklist .check { width:20px; height:20px; background:var(--nav-active); border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
         .checklist .check svg { width:12px; height:12px; stroke:var(--white); stroke-width:2; fill:none; }
 
-        /* ── Price Card ── */
-        .pricing-col { position:relative; }
-        .price-card { background:var(--white); border-radius:16px; padding:24px; border:1px solid var(--border); position:absolute; bottom:-16px; right:-16px; box-shadow:0 10px 40px rgba(27,31,59,.1); z-index:5; }
-        .price { font-size:40px; font-weight:900; line-height:1; }
-        .price-note { font-size:14px; color:var(--text-secondary); margin-top:4px; }
+        /* ── Pricing Cards (3 tiers) ── */
+        .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+        .pricing-card { background:var(--white); border-radius:20px; padding:32px 28px; border:2px solid var(--border); transition:all .3s; position:relative; }
+        .pricing-card:hover { border-color:var(--accent-blue); transform:translateY(-4px); box-shadow:0 12px 40px rgba(27,31,59,.08); }
+        .pricing-card.featured { border-color:var(--nav-active); box-shadow:0 8px 32px rgba(27,31,59,.12); }
+        .pricing-card .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent-gold); color:var(--white); padding:6px 18px; border-radius:50px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+        .pricing-card .tier-name { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:8px; }
+        .pricing-card .tier-price { font-size:38px; font-weight:900; line-height:1; margin-bottom:4px; }
+        .pricing-card .tier-period { font-size:14px; color:var(--text-secondary); margin-bottom:20px; }
+        .pricing-card .tier-list { list-style:none; margin-top:16px; }
+        .pricing-card .tier-list li { display:flex; align-items:flex-start; gap:8px; padding:7px 0; font-size:14px; color:var(--text-secondary); }
+        .pricing-card .tier-list li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; font-size:15px; }
+        .pricing-card .tier-cta { display:block; text-align:center; margin-top:24px; padding:12px; border-radius:12px; font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; transition:all .3s; }
+        .pricing-card .tier-cta.dark { background:var(--nav-active); color:var(--white); }
+        .pricing-card .tier-cta.outline { border:2px solid var(--border); color:var(--text-primary); }
+        .pricing-card .tier-cta:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(27,31,59,.1); }
+
+        /* ── Cases Grid ── */
+        .cases-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+        .case-card { background:var(--white); border-radius:16px; padding:28px; border:1px solid var(--border); transition:all .3s; }
+        .case-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(27,31,59,.08); }
+        .case-card .case-emoji { font-size:32px; margin-bottom:12px; }
+        .case-card .case-niche { font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent-blue); margin-bottom:8px; }
+        .case-card .case-title { font-size:17px; font-weight:700; margin-bottom:8px; line-height:1.3; }
+        .case-card .case-desc { font-size:14px; color:var(--text-secondary); line-height:1.5; margin-bottom:16px; }
+        .case-card .case-result { display:inline-block; background:#ECFDF5; color:var(--green); padding:6px 14px; border-radius:50px; font-size:13px; font-weight:700; }
+
+        /* ── Testimonials ── */
+        .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+        .testimonial-card { background:var(--white); border-radius:16px; padding:28px; border:1px solid var(--border); position:relative; }
+        .testimonial-card .quote-mark { font-size:48px; color:var(--accent-blue); opacity:.4; line-height:1; font-family:Georgia,serif; }
+        .testimonial-card .quote-text { font-size:15px; line-height:1.6; color:var(--text-primary); margin-top:-20px; margin-bottom:20px; }
+        .testimonial-card .quote-author { display:flex; align-items:center; gap:12px; }
+        .testimonial-card .author-avatar { width:44px; height:44px; border-radius:50%; background:var(--card-bg); display:flex; align-items:center; justify-content:center; font-size:18px; }
+        .testimonial-card .author-info .author-name { font-size:14px; font-weight:700; }
+        .testimonial-card .author-info .author-role { font-size:13px; color:var(--text-muted); }
+
+        /* ── FAQ ── */
+        .faq-list { max-width:800px; margin:40px auto 0; }
+        .faq-item { background:var(--white); border-radius:12px; margin-bottom:12px; overflow:hidden; border:1px solid var(--border); }
+        .faq-question { padding:20px 24px; font-size:16px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s; }
+        .faq-question:hover { background:var(--card-bg); }
+        .faq-question .arrow { font-size:20px; transition:transform .3s; color:var(--text-muted); }
+        .faq-item.open .faq-question .arrow { transform:rotate(180deg); }
+        .faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+        .faq-item.open .faq-answer { max-height:300px; }
+        .faq-answer-inner { padding:0 24px 20px; font-size:15px; color:var(--text-secondary); line-height:1.6; }
 
         /* ── Test Badge ── */
         .test-badge { position:absolute; top:40px; right:40px; background:var(--nav-active); color:var(--white); padding:16px 24px; border-radius:16px; text-align:center; z-index:10; }
@@ -124,25 +213,30 @@
         @media(max-width:1200px) {
             .header { padding:20px 40px; }
             .section { padding:100px 40px 60px; }
+            .section-full { padding:80px 40px 60px; }
             .section-inner { gap:60px; }
             .h1 { font-size:44px; }
-            .h2 { font-size:56px; }
+            .h2, .h2-center { font-size:52px; }
+            .pricing-grid { grid-template-columns:1fr; max-width:500px; margin:40px auto 0; }
+            .cases-grid { grid-template-columns:repeat(2,1fr); }
+            .testimonials-grid { grid-template-columns:repeat(2,1fr); }
         }
         @media(max-width:900px) {
             .section-inner { grid-template-columns:1fr; gap:40px; }
-            .image-card, .pricing-col { max-width:500px; margin:0 auto; }
+            .image-card { max-width:500px; margin:0 auto; }
             .nav { display:none; }
             .menu-btn { display:flex; }
             .h1 { font-size:36px; }
-            .h2 { font-size:48px; }
+            .h2, .h2-center { font-size:42px; }
+            .cases-grid, .testimonials-grid { grid-template-columns:1fr; max-width:500px; margin:30px auto 0; }
         }
         @media(max-width:600px) {
             .header { padding:16px 24px; }
             .section { padding:80px 24px 40px; min-height:auto; }
+            .section-full { padding:60px 24px 40px; }
             .h1 { font-size:28px; }
-            .h2 { font-size:36px; }
+            .h2, .h2-center { font-size:34px; }
             .body-text { font-size:16px; }
-            .price-card { position:relative; bottom:auto; right:auto; margin-top:24px; }
             .test-badge { position:relative; top:auto; right:auto; margin-bottom:24px; display:inline-block; }
             .comparison-table td, .comparison-table th { padding:10px 8px; font-size:14px; }
         }
@@ -157,10 +251,10 @@
     </div>
     <nav class="nav">
         <a href="#hero" class="active">Главная</a>
-        <a href="#about">О нас</a>
-        <a href="#who">Кому</a>
+        <a href="#cases">Кейсы</a>
         <a href="#features">Возможности</a>
         <a href="#pricing">Цены</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Контакты</a>
     </nav>
     <div class="menu-btn"><span></span><span></span></div>
@@ -174,10 +268,7 @@
             <h1 class="h1">Ваш ИИ-ассистент</h1>
             <h2 class="h2">для бизнеса</h2>
             <p class="body-text">Персональный помощник, который закрывает задачи программиста, дизайнера, аналитика и коуча. Работает прямо в вашем мессенджере 24/7.</p>
-            <a href="#about" class="cta-btn">
-                Узнать больше
-                <span class="circle"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </a>
+            <a href="#pricing" class="cta-btn-dark">Тест-драйв 12 часов бесплатно</a>
             <div class="tags">
                 <span class="tag">● Telegram & WhatsApp</span>
                 <span class="tag">● Zoom обучение</span>
@@ -185,7 +276,7 @@
             </div>
         </div>
         <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="AI">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="ИИ-ассистент для бизнеса">
         </div>
     </div>
 </section>
@@ -200,13 +291,13 @@
             <p class="subtitle">КОМПЛЕКСНОЕ ВНЕДРЕНИЕ ИИ</p>
             <p class="body-text" style="margin-bottom:24px">Мы разрабатываем индивидуального ассистента, который знает историю вашей компании, ваши цели и задачи. Помогаем управлять им, обучаем сотрудников и внедряем под ключ.</p>
             <p class="body-text">Обучение в живом и записанном формате. Еженедельные Zoom-встречи с разбором вопросов. Чат-комьюнити для предпринимателей с уроками по настройке ассистента.</p>
-            <a href="#who" class="cta-btn">
-                Кому подходит
+            <a href="#cases" class="cta-btn">
+                Кейсы клиентов
                 <span class="circle"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </a>
         </div>
         <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Robot">
+            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Внедрение ИИ">
         </div>
     </div>
 </section>
@@ -250,12 +341,66 @@
             </div>
         </div>
         <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robot">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Кому подходит ИИ-ассистент">
         </div>
     </div>
 </section>
 
-<!-- 4. Features -->
+<!-- 4. Cases -->
+<section id="cases" class="section section-full">
+    <span class="asterisk" style="top:10%;right:10%">✦</span>
+    <div class="section-inner">
+        <h1 class="h2-center">Кейсы клиентов</h1>
+        <p class="subtitle-center">РЕАЛЬНЫЕ ЗАДАЧИ — РЕАЛЬНЫЕ РЕЗУЛЬТАТЫ</p>
+
+        <div class="cases-grid">
+            <div class="case-card">
+                <div class="case-emoji">🏗️</div>
+                <div class="case-niche">Строительство, Курск</div>
+                <div class="case-title">22 договора КС-2/3 за один день</div>
+                <div class="case-desc">Подготовили пакет договоров для муниципального контракта. Раньше на это уходила неделя работы юриста.</div>
+                <span class="case-result">⚡ В 5 раз быстрее</span>
+            </div>
+            <div class="case-card">
+                <div class="case-emoji">🏨</div>
+                <div class="case-niche">Гостиничное оснащение, Сочи</div>
+                <div class="case-title">2 сайта + 3 презентации за неделю</div>
+                <div class="case-desc">Разработали сайты для двух компаний и подготовили презентации для инвесторов. База клиентов — 164 контакта в 12 категориях.</div>
+                <span class="case-result">💼 Неделя вместо месяца</span>
+            </div>
+            <div class="case-card">
+                <div class="case-emoji">🦷</div>
+                <div class="case-niche">Стоматология, Курск</div>
+                <div class="case-title">Контент-план и AI-аватары</div>
+                <div class="case-desc">Составили контент-стратегию на месяц, запустили AI-аватары для видеообращений, настроили интеграции с CRM.</div>
+                <span class="case-result">🎬 30 дней контента</span>
+            </div>
+            <div class="case-card">
+                <div class="case-emoji">👗</div>
+                <div class="case-niche">Дизайнерская одежда</div>
+                <div class="case-title">Статья для глянцевого журнала</div>
+                <div class="case-desc">Написали статью для профильного издания через 8 итераций с обратной связью. Подобрали обложку и визуал.</div>
+                <span class="case-result">📝 Готово к публикации</span>
+            </div>
+            <div class="case-card">
+                <div class="case-emoji">🌸</div>
+                <div class="case-niche">Цветочный ритейл, 3 точки</div>
+                <div class="case-title">30 идей роста + анализ конкурентов</div>
+                <div class="case-desc">Сеть цветочных магазинов с рейтингом 5.0 и 13-летней историей. Подготовили идеи роста и проанализировали конкурентов.</div>
+                <span class="case-result">📈 30 стратегий роста</span>
+            </div>
+            <div class="case-card">
+                <div class="case-emoji">📐</div>
+                <div class="case-niche">Межевание, Тюмень</div>
+                <div class="case-title">Объявления и материалы для Avito</div>
+                <div class="case-desc">Подготовили рекламные материалы для аренды спецтехники. Описания, фото, расчёт стоимости смены.</div>
+                <span class="case-result">🚀 Готов к запуску</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. Features -->
 <section id="features" class="section">
     <span class="asterisk" style="top:20%;right:20%">✦</span>
     <div class="section-inner">
@@ -274,72 +419,253 @@
                     <tr><td class="feature">Обучаемость</td><td class="negative">Каждый раз с нуля</td><td class="positive">Учится и запоминает</td></tr>
                 </tbody>
             </table>
-            <div class="feature-tags">
-                <span class="feature-tag">📊 Финмодели</span>
-                <span class="feature-tag">🎬 Видео</span>
-                <span class="feature-tag">📁 Контент</span>
-                <span class="feature-tag">🖼 Картинки</span>
-                <span class="feature-tag">🌐 Сайты</span>
-                <span class="feature-tag">📱 Приложения</span>
-                <span class="feature-tag">🔍 Аналитика</span>
-                <span class="feature-tag">📄 Документы</span>
+            <div class="cards-list" style="margin-top:32px">
+                <div class="card-item">
+                    <div class="card-icon blue">📊</div>
+                    <div class="card-content">
+                        <h3>Финмодели и расчёты</h3>
+                        <p>Сметы, расчёты окупаемости, план продаж — за 10 минут вместо 2 дней</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon orange">🎬</div>
+                    <div class="card-content">
+                        <h3>Видео и Reels</h3>
+                        <p>Сценарии, озвучка, AI-аватары, видеомонтаж для соцсетей и рекламы</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon green">📄</div>
+                    <div class="card-content">
+                        <h3>Документы и договоры</h3>
+                        <p>КС-2/3, коммерческие предложения, юридические документы за минуты</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon purple">🌐</div>
+                    <div class="card-content">
+                        <h3>Сайты и приложения</h3>
+                        <p>Лендинги, интернет-магазины, MVP приложений — от идеи до запуска</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon blue">🔍</div>
+                    <div class="card-content">
+                        <h3>Аналитика и исследования</h3>
+                        <p>Анализ конкурентов, проверка цен, исследование рынка — с реальными данными</p>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="card-icon green">🖼</div>
+                    <div class="card-content">
+                        <h3>Дизайн и изображения</h3>
+                        <p>Презентации, баннеры, карточки товаров, обложки — в вашем бренд-стиле</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="AI Work">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="Возможности ИИ-ассистента">
         </div>
     </div>
 </section>
 
-<!-- 5. Pricing -->
-<section id="pricing" class="section">
-    <span class="asterisk" style="top:25%;left:10%">✦</span>
+<!-- 6. Pricing -->
+<section id="pricing" class="section section-full">
+    <span class="asterisk" style="top:8%;left:8%">✦</span>
     <div class="section-inner">
-        <div>
-            <h1 class="h1">Что входит</h1>
-            <h2 class="h2">в подписку</h2>
-            <p class="subtitle">ВСЁ ВКЛЮЧЕНО</p>
-            <ul class="checklist">
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Персональный ИИ-ассистент для вашего бизнеса</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Работа с текстом, расчётами, документами</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Генерация изображений и презентаций</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Генерация видео и визуального контента</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Создание приложений, сайтов и автоматизаций</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Анализ конкурентов и рынка</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Еженедельное обучение по Zoom</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Чат-комьюнити с уроками</li>
-                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Поддержка и консультации 24/7</li>
-            </ul>
-            <div class="tags">
-                <span class="tag">● Дешевле одного сотрудника</span>
-                <span class="tag">● 24/7 без выходных</span>
+        <h1 class="h2-center">Тарифы</h1>
+        <p class="subtitle-center">ВЫБЕРИТЕ СВОЙ ФОРМАТ РАБОТЫ</p>
+
+        <div class="pricing-grid">
+            <!-- Tier 1: Start -->
+            <div class="pricing-card">
+                <div class="tier-name">Старт</div>
+                <div class="tier-price">25 000 ₽</div>
+                <div class="tier-period">в месяц</div>
+                <ul class="tier-list">
+                    <li>Персональный ИИ-ассистент</li>
+                    <li>Работа с текстом и документами</li>
+                    <li>Генерация изображений</li>
+                    <li>Анализ конкурентов и рынка</li>
+                    <li>Еженедельные Zoom-встречи</li>
+                    <li>Чат-комьюнити</li>
+                    <li>Поддержка 24/7</li>
+                </ul>
+                <a href="#contact" class="tier-cta outline">Выбрать Старт</a>
+            </div>
+
+            <!-- Tier 2: Practika (Featured) -->
+            <div class="pricing-card featured">
+                <div class="badge">⭐ Популярный</div>
+                <div class="tier-name">Практика</div>
+                <div class="tier-price">35 000 ₽</div>
+                <div class="tier-period">в месяц</div>
+                <ul class="tier-list">
+                    <li>Всё из тарифа «Старт»</li>
+                    <li>Настройка инструментов под вас</li>
+                    <li>Подключение внешних сервисов</li>
+                    <li>Генерация видео и Reels</li>
+                    <li>Создание сайтов и лендингов</li>
+                    <li>Интеграции с CRM и таблицами</li>
+                    <li>Приоритетная поддержка</li>
+                </ul>
+                <a href="#contact" class="tier-cta dark">Выбрать Практику</a>
+            </div>
+
+            <!-- Tier 3: Pod Klyuch -->
+            <div class="pricing-card">
+                <div class="tier-name">Под ключ</div>
+                <div class="tier-price">200 000 ₽</div>
+                <div class="tier-period">разовая настройка</div>
+                <ul class="tier-list">
+                    <li>Полная настройка под бизнес</li>
+                    <li>Размещение на вашем сервере</li>
+                    <li>Автономная работа агентов</li>
+                    <li>Обучение вашей команды</li>
+                    <li>Кастомные интеграции</li>
+                    <li>Полная независимость от нас</li>
+                    <li>3 месяца поддержки</li>
+                </ul>
+                <a href="#contact" class="tier-cta outline">Обсудить проект</a>
             </div>
         </div>
-        <div class="pricing-col">
-            <div class="test-badge">
-                <div class="label"><span>🎯</span> ТЕСТ</div>
-                <div class="value">12 часов бесплатно</div>
+
+        <div style="text-align:center; margin-top:40px;">
+            <p style="font-size:15px; color:var(--text-secondary); margin-bottom:8px;">🎯 Не уверены, какой тариф подходит?</p>
+            <a href="#contact" style="font-size:15px; font-weight:700; color:var(--text-primary); text-decoration:underline;">Возьмите тест-драйв на 12 часов бесплатно →</a>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Testimonials -->
+<section id="testimonials" class="section section-full">
+    <div class="section-inner">
+        <h1 class="h2-center">Отзывы</h1>
+        <p class="subtitle-center">ЧТО ГОВОРЯТ НАШИ КЛИЕНТЫ</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">Закрыли пакет из 22 договоров за один день. Раньше на это уходила неделя. Ассистент знает специфику строительной документации и не требует объяснений каждый раз.</p>
+                <div class="quote-author">
+                    <div class="author-avatar">🏗️</div>
+                    <div class="author-info">
+                        <div class="author-name">Строительная компания</div>
+                        <div class="author-role">Курская область</div>
+                    </div>
+                </div>
             </div>
-            <div class="image-card">
-                <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=800&q=80" alt="AI Brain">
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">Два сайта и три презентации для инвесторов за неделю. Раньше нанимали студию — это занимало месяц и стоило в 5 раз дороже. Теперь ассистент — наш постоянный сотрудник.</p>
+                <div class="quote-author">
+                    <div class="author-avatar">🏨</div>
+                    <div class="author-info">
+                        <div class="author-name">Гостиничный бизнес</div>
+                        <div class="author-role">Сочи</div>
+                    </div>
+                </div>
             </div>
-            <div class="price-card">
-                <div class="price">25 000 ₽</div>
-                <div class="price-note">в месяц</div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">Контент-план на месяц готов, AI-аватары снимают видеообращения для пациентов. Это новый уровень. Конкуренты до сих пор не понимают, как мы так быстро выкладываем контент.</p>
+                <div class="quote-author">
+                    <div class="author-avatar">🦷</div>
+                    <div class="author-info">
+                        <div class="author-name">Сеть стоматологий</div>
+                        <div class="author-role">Курск</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 6. Contact -->
+<!-- 8. FAQ -->
+<section id="faq" class="section section-full">
+    <span class="asterisk" style="bottom:20%;right:10%">✦</span>
+    <div class="section-inner">
+        <h1 class="h2-center">Частые вопросы</h1>
+        <p class="subtitle-center">ОТВЕЧАЕМ НА ГЛАВНОЕ</p>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Чем это отличается от ChatGPT?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    ChatGPT — универсальный чат, который забывает контекст после закрытия вкладки. Наш ассистент помнит ваш бизнес, клиентов, задачи и стиль работы. Он живёт в вашем Telegram, генерирует файлы, изображения и видео, обучается на каждом взаимодействии и работает 24/7 без подписки на зарубежные сервисы.
+                </div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Нужно ли техническое образование?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Нет. Вы общаетесь с ассистентом как с обычным сотрудником в мессенджере — текстом или голосом. Всю техническую настройку берём на себя. На еженедельных Zoom-встречах показываем, как получать максимум от ассистента.
+                </div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Что входит в тест-драйв 12 часов?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Полноценный доступ к ассистенту на 12 часов. Вы ставите реальные задачи — документы, контент, аналитику — и видите результат. Никаких демо-режимов: работаем с вашими данными и вашими задачами.
+                </div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Безопасны ли мои данные?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Да. Все данные хранятся на защищённом сервере. На тарифе «Под ключ» ассистент разворачивается полностью на вашей инфраструктуре — вы контролируете 100% данных. Мы не передаём информацию третьим лицам.
+                </div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Сколько времени занимает настройка?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Базовая настройка — 1–2 дня. Мы изучаем ваш бизнес, загружаем материалы, настраиваем стиль общения. Полная настройка под ключ занимает 1–2 недели, включая обучение команды и интеграцию с вашими сервисами.
+                </div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Можно ли отменить подписку?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Да, в любой момент. Подписка оплачивается помесячно, без долгосрочных контрактов. На тарифе «Под ключ» ассистент остаётся у вас навсегда — даже если вы перестанете пользоваться нашей поддержкой.
+                </div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Какие мессенджеры поддерживаются?
+                    <span class="arrow">⌄</span>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Telegram и WhatsApp. Ассистент работает в том мессенджере, который удобен вам и вашей команде. Можно подключить несколько сотрудников одновременно — у каждого свой доступ и свои задачи.
+                </div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 9. Contact -->
 <section id="contact" class="section">
     <span class="asterisk" style="top:15%;right:15%">✦</span>
     <span class="asterisk" style="bottom:25%;left:10%">✦</span>
     <div class="section-inner">
         <div>
-            <h1 class="h1">Спасибо!</h1>
+            <h1 class="h1">Готовы начать?</h1>
             <h2 class="h2">Контакты</h2>
-            <p class="body-text" style="margin-bottom:16px">Этот лендинг создал мой ИИ-ассистент.</p>
+            <p class="body-text" style="margin-bottom:16px">Возьмите тест-драйв на 12 часов бесплатно — и решите сами.</p>
             <p class="body-text" style="font-weight:700;font-size:20px">Удачного дня!</p>
             <div class="contact-cards">
                 <a href="tel:+79202669966" class="contact-card">
@@ -372,7 +698,7 @@
             </div>
         </div>
         <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80" alt="AI Future">
+            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80" alt="Связаться с VAcademy">
         </div>
     </div>
 </section>
