@@ -24,20 +24,10 @@
       "@type": "Service",
       "name": "VAcademy — ИИ-ассистент для бизнеса",
       "description": "Персональный AI-помощник для бизнеса: программист, дизайнер, аналитик и коуч в одном мессенджере",
-      "provider": {
-        "@type": "Organization",
-        "name": "VAcademy",
-        "url": "https://vardges13.github.io/va-academy/"
-      },
+      "provider": { "@type": "Organization", "name": "VAcademy", "url": "https://vardges13.github.io/va-academy/" },
       "areaServed": "RU",
       "serviceType": "AI-ассистент для бизнеса",
-      "offers": {
-        "@type": "AggregateOffer",
-        "lowPrice": "25000",
-        "highPrice": "200000",
-        "priceCurrency": "RUB",
-        "offerCount": "3"
-      }
+      "offers": { "@type": "AggregateOffer", "lowPrice": "25000", "highPrice": "200000", "priceCurrency": "RUB", "offerCount": "3" }
     }
     </script>
 
@@ -46,199 +36,231 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #EAECF0;
-            --bg-dark: #E3E5EA;
-            --text-primary: #1B1F3B;
-            --text-secondary: #6B7280;
-            --text-muted: #9CA3AF;
-            --nav-active: #1B1F3B;
+            --bg: #0A0B1E;
+            --bg-soft: #0F1124;
+            --surface: #14162E;
+            --surface-hover: #1A1D38;
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+            --text-primary: #F0F1F5;
+            --text-secondary: #8B8FA3;
+            --text-muted: #5C5F73;
             --white: #FFFFFF;
-            --card-bg: #F3F4F6;
-            --border: #D1D5DB;
-            --green: #16A34A;
-            --red: #DC2626;
-            --accent-blue: #A5B4C4;
-            --accent-gold: #D97706;
+            --accent: #F5A623;
+            --accent-soft: rgba(245,166,35,0.12);
+            --accent-glow: rgba(245,166,35,0.25);
+            --accent2: #7C5CFC;
+            --green: #2ECC71;
+            --red: #E74C3C;
+            --radius: 16px;
+            --radius-lg: 24px;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
-        body { font-family:'Manrope',sans-serif; background:var(--bg); color:var(--text-primary); line-height:1.6; overflow-x:hidden; }
+        body {
+            font-family:'Manrope',sans-serif;
+            background:var(--bg);
+            color:var(--text-primary);
+            line-height:1.6;
+            overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;
+        }
+
+        /* ── Ambient Background Glow ── */
+        body::before {
+            content:''; position:fixed; top:-200px; left:-200px;
+            width:600px; height:600px;
+            background:radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%);
+            pointer-events:none; z-index:0;
+        }
+        body::after {
+            content:''; position:fixed; bottom:-300px; right:-200px;
+            width:700px; height:700px;
+            background:radial-gradient(circle, rgba(124,92,252,0.05) 0%, transparent 70%);
+            pointer-events:none; z-index:0;
+        }
 
         /* ── Header ── */
-        .header { position:fixed; top:0; left:0; right:0; z-index:100; padding:24px 60px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(12px); background:rgba(234,236,240,0.8); }
-        .logo { display:flex; flex-direction:column; }
-        .logo-top { font-size:16px; font-weight:800; letter-spacing:1px; text-transform:uppercase; line-height:1; }
-        .logo-bottom { font-size:10px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:var(--text-secondary); }
-        .nav { background:var(--white); border-radius:50px; padding:6px; display:flex; gap:2px; }
-        .nav a { text-decoration:none; color:#374151; font-size:12px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:12px 18px; border-radius:50px; transition:all .3s; }
-        .nav a:hover { color:var(--text-primary); }
-        .nav a.active { background:var(--nav-active); color:var(--white); }
-        .menu-btn { width:40px; height:40px; display:none; flex-direction:column; justify-content:center; gap:6px; cursor:pointer; }
-        .menu-btn span { width:24px; height:2px; background:var(--text-primary); border-radius:2px; }
+        .header {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            padding:18px 60px; display:flex; justify-content:space-between; align-items:center;
+            backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+            background:rgba(10,11,30,0.72);
+            border-bottom:1px solid var(--glass-border);
+        }
+        .logo { font-size:18px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+            background:linear-gradient(135deg, #F0F1F5 0%, #F5A623 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .nav { display:flex; gap:4px; background:var(--glass); border-radius:50px; padding:5px; border:1px solid var(--glass-border); }
+        .nav a { text-decoration:none; color:var(--text-secondary); font-size:12px; font-weight:500; letter-spacing:1px; text-transform:uppercase; padding:10px 16px; border-radius:50px; transition:all .3s; }
+        .nav a:hover { color:var(--text-primary); background:var(--glass); }
+        .nav a.active { background:var(--accent); color:var(--bg); font-weight:700; }
+        .menu-btn { width:36px; height:36px; display:none; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; }
+        .menu-btn span { width:22px; height:2px; background:var(--text-primary); border-radius:2px; }
 
         /* ── Section ── */
-        .section { min-height:100vh; padding:100px 60px 60px; display:flex; align-items:center; position:relative; }
-        .section-inner { max-width:1400px; width:100%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+        .section { min-height:100vh; padding:120px 60px 80px; display:flex; align-items:center; position:relative; z-index:1; }
+        .section-inner { max-width:1300px; width:100%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
         section[id] { scroll-margin-top:80px; }
-
-        /* ── Full-width Section (for new sections) ── */
-        .section-full { min-height:auto; padding:100px 60px 80px; }
+        .section-full { min-height:auto; padding:120px 60px 80px; }
         .section-full .section-inner { display:block; }
 
         /* ── Typography ── */
-        .h1 { font-size:48px; font-weight:800; line-height:1.1; }
-        .h2 { font-size:60px; font-weight:900; line-height:1.1; margin-bottom:20px; }
-        .h2-center { font-size:60px; font-weight:900; line-height:1.1; text-align:center; margin-bottom:16px; }
-        .subtitle { font-size:12px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:24px; }
-        .subtitle-center { font-size:12px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:40px; text-align:center; }
-        .body-text { font-size:16px; line-height:1.6; max-width:540px; }
+        .h1 { font-size:52px; font-weight:800; line-height:1.05; letter-spacing:-1px; }
+        .h2 { font-size:64px; font-weight:900; line-height:1.05; margin-bottom:24px; letter-spacing:-2px; }
+        .h2-center { font-size:56px; font-weight:900; line-height:1.05; text-align:center; margin-bottom:16px; letter-spacing:-2px; }
+        .subtitle { font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:24px; }
+        .subtitle-center { font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:48px; text-align:center; }
+        .body-text { font-size:17px; line-height:1.7; max-width:520px; color:var(--text-secondary); }
 
-        /* ── CTA Button ── */
-        .cta-btn { display:inline-flex; align-items:center; gap:12px; background:var(--card-bg); border:1px solid var(--border); border-radius:50px; padding:12px 24px; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-primary); cursor:pointer; transition:all .3s; text-decoration:none; margin-top:28px; }
-        .cta-btn:hover { background:var(--white); box-shadow:0 4px 20px rgba(27,31,59,.08); }
-        .cta-btn .circle { width:24px; height:24px; background:var(--nav-active); border-radius:50%; display:flex; align-items:center; justify-content:center; }
-        .cta-btn .circle svg { width:12px; height:12px; stroke:var(--white); stroke-width:2; fill:none; }
-
-        .cta-btn-dark { display:inline-flex; align-items:center; gap:10px; background:var(--nav-active); color:var(--white); border:none; border-radius:50px; padding:14px 32px; font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all .3s; text-decoration:none; margin-top:32px; }
-        .cta-btn-dark:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(27,31,59,.2); }
+        /* ── CTA Buttons ── */
+        .cta-gradient {
+            display:inline-flex; align-items:center; gap:10px;
+            background:linear-gradient(135deg, var(--accent) 0%, #E8941A 100%);
+            color:#1A1207; border:none; border-radius:50px;
+            padding:16px 32px; font-size:14px; font-weight:800; letter-spacing:0.5px;
+            cursor:pointer; transition:all .3s; text-decoration:none; margin-top:32px;
+            box-shadow:0 4px 24px var(--accent-glow);
+        }
+        .cta-gradient:hover { transform:translateY(-2px); box-shadow:0 8px 32px var(--accent-glow); }
+        .cta-glass {
+            display:inline-flex; align-items:center; gap:10px;
+            background:var(--glass); color:var(--text-primary);
+            border:1px solid var(--glass-border); border-radius:50px;
+            padding:14px 28px; font-size:13px; font-weight:600; letter-spacing:0.5px;
+            cursor:pointer; transition:all .3s; text-decoration:none; margin-top:28px;
+        }
+        .cta-glass:hover { background:var(--surface-hover); border-color:var(--accent); }
 
         /* ── Tags ── */
-        .tags { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
-        .tag { background:var(--white); border:1px solid var(--border); border-radius:50px; padding:8px 14px; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
+        .tags { display:flex; gap:8px; margin-top:24px; flex-wrap:wrap; }
+        .tag { background:var(--glass); border:1px solid var(--glass-border); border-radius:50px; padding:8px 16px; font-size:11px; font-weight:500; letter-spacing:0.5px; color:var(--text-secondary); }
 
         /* ── Image Card ── */
-        .image-card { position:relative; border-radius:24px; overflow:hidden; box-shadow:0 20px 60px rgba(27,31,59,.1); }
+        .image-card { position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.4); }
+        .image-card::after { content:''; position:absolute; inset:0; border-radius:var(--radius-lg); border:1px solid var(--glass-border); pointer-events:none; }
         .image-card img { width:100%; height:auto; display:block; }
-
-        /* ── Decorative ── */
-        .asterisk { position:absolute; font-size:60px; color:var(--accent-blue); opacity:.5; line-height:1; pointer-events:none; }
+        .image-glow { position:absolute; inset:-2px; border-radius:var(--radius-lg); background:linear-gradient(135deg, var(--accent-glow), transparent, rgba(124,92,252,0.15)); opacity:0.5; z-index:-1; filter:blur(20px); }
 
         /* ── Cards List ── */
         .cards-list { display:flex; flex-direction:column; margin-top:24px; }
-        .card-item { display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); }
+        .card-item { display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--glass-border); }
         .card-item:last-child { border-bottom:none; }
-        .card-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
-        .card-icon.blue { background:#EEF2FF; }
-        .card-icon.green { background:#ECFDF5; }
-        .card-icon.orange { background:#FFF7ED; }
-        .card-icon.purple { background:#F5F3FF; }
-        .card-content h3 { font-size:17px; font-weight:700; margin-bottom:4px; }
-        .card-content p { font-size:14px; color:var(--text-secondary); line-height:1.4; }
+        .card-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+        .card-icon.blue { background:rgba(124,92,252,0.12); }
+        .card-icon.green { background:rgba(46,204,113,0.12); }
+        .card-icon.orange { background:var(--accent-soft); }
+        .card-icon.purple { background:rgba(124,92,252,0.12); }
+        .card-content h3 { font-size:17px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+        .card-content p { font-size:14px; color:var(--text-secondary); line-height:1.5; }
 
         /* ── Comparison Table ── */
         .comparison-table { width:100%; margin-top:24px; border-collapse:collapse; }
-        .comparison-table th { text-align:left; padding:10px 12px; font-size:13px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; }
-        .comparison-table th:last-child { color:var(--text-primary); font-weight:800; }
-        .comparison-table td { padding:10px 12px; font-size:15px; }
-        .comparison-table tr:nth-child(even) { background:rgba(243,244,246,.5); }
-        .comparison-table .feature { font-weight:600; }
-        .comparison-table .negative { color:var(--red); font-weight:500; }
-        .comparison-table .positive { color:var(--green); font-weight:500; }
+        .comparison-table th { text-align:left; padding:12px; font-size:12px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid var(--glass-border); }
+        .comparison-table th:last-child { color:var(--accent); font-weight:800; }
+        .comparison-table td { padding:12px; font-size:15px; border-bottom:1px solid var(--glass-border); }
+        .comparison-table tr:last-child td { border-bottom:none; }
+        .comparison-table .feature { font-weight:600; color:var(--text-primary); }
+        .comparison-table .negative { color:var(--text-muted); }
+        .comparison-table .positive { color:var(--green); font-weight:600; }
 
-        /* ── Feature Tags ── */
-        .feature-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:20px; }
-        .feature-tag { background:var(--white); border:1px solid var(--border); border-radius:50px; padding:6px 12px; font-size:12px; font-weight:500; display:flex; align-items:center; gap:4px; }
-
-        /* ── Checklist ── */
-        .checklist { list-style:none; margin-top:24px; }
-        .checklist li { display:flex; align-items:flex-start; gap:12px; padding:8px 0; font-size:15px; }
-        .checklist .check { width:20px; height:20px; background:var(--nav-active); border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-        .checklist .check svg { width:12px; height:12px; stroke:var(--white); stroke-width:2; fill:none; }
-
-        /* ── Pricing Cards (3 tiers) ── */
+        /* ── Pricing Cards ── */
         .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
-        .pricing-card { background:var(--white); border-radius:20px; padding:32px 28px; border:2px solid var(--border); transition:all .3s; position:relative; }
-        .pricing-card:hover { border-color:var(--accent-blue); transform:translateY(-4px); box-shadow:0 12px 40px rgba(27,31,59,.08); }
-        .pricing-card.featured { border-color:var(--nav-active); box-shadow:0 8px 32px rgba(27,31,59,.12); }
-        .pricing-card .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent-gold); color:var(--white); padding:6px 18px; border-radius:50px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
-        .pricing-card .tier-name { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:8px; }
-        .pricing-card .tier-price { font-size:38px; font-weight:900; line-height:1; margin-bottom:4px; }
-        .pricing-card .tier-period { font-size:14px; color:var(--text-secondary); margin-bottom:20px; }
+        .pricing-card {
+            background:var(--surface); border-radius:var(--radius-lg); padding:36px 30px;
+            border:1px solid var(--glass-border); transition:all .4s; position:relative;
+        }
+        .pricing-card:hover { border-color:rgba(245,166,35,0.3); transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.3); }
+        .pricing-card.featured { border-color:var(--accent); background:linear-gradient(180deg, var(--surface) 0%, rgba(245,166,35,0.04) 100%); box-shadow:0 8px 40px var(--accent-glow); }
+        .pricing-card .badge { position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg, var(--accent), #E8941A); color:#1A1207; padding:6px 20px; border-radius:50px; font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+        .pricing-card .tier-name { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+        .pricing-card .tier-price { font-size:40px; font-weight:900; line-height:1; margin-bottom:4px; }
+        .pricing-card .tier-period { font-size:14px; color:var(--text-muted); margin-bottom:24px; }
         .pricing-card .tier-list { list-style:none; margin-top:16px; }
         .pricing-card .tier-list li { display:flex; align-items:flex-start; gap:8px; padding:7px 0; font-size:14px; color:var(--text-secondary); }
-        .pricing-card .tier-list li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; font-size:15px; }
-        .pricing-card .tier-cta { display:block; text-align:center; margin-top:24px; padding:12px; border-radius:12px; font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; transition:all .3s; }
-        .pricing-card .tier-cta.dark { background:var(--nav-active); color:var(--white); }
-        .pricing-card .tier-cta.outline { border:2px solid var(--border); color:var(--text-primary); }
-        .pricing-card .tier-cta:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(27,31,59,.1); }
+        .pricing-card .tier-list li::before { content:'✓'; color:var(--accent); font-weight:800; flex-shrink:0; }
+        .pricing-card .tier-cta { display:block; text-align:center; margin-top:28px; padding:14px; border-radius:12px; font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; transition:all .3s; }
+        .pricing-card .tier-cta.solid { background:var(--accent); color:#1A1207; }
+        .pricing-card .tier-cta.outline { border:1px solid var(--glass-border); color:var(--text-primary); }
+        .pricing-card .tier-cta:hover { transform:translateY(-2px); }
 
         /* ── Cases Grid ── */
-        .cases-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
-        .case-card { background:var(--white); border-radius:16px; padding:28px; border:1px solid var(--border); transition:all .3s; }
-        .case-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(27,31,59,.08); }
-        .case-card .case-emoji { font-size:32px; margin-bottom:12px; }
-        .case-card .case-niche { font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent-blue); margin-bottom:8px; }
-        .case-card .case-title { font-size:17px; font-weight:700; margin-bottom:8px; line-height:1.3; }
+        .cases-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px; }
+        .case-card { background:var(--surface); border-radius:var(--radius); padding:28px; border:1px solid var(--glass-border); transition:all .3s; }
+        .case-card:hover { border-color:rgba(245,166,35,0.25); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.25); }
+        .case-card .case-emoji { font-size:28px; margin-bottom:14px; }
+        .case-card .case-niche { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+        .case-card .case-title { font-size:16px; font-weight:700; margin-bottom:8px; line-height:1.35; color:var(--text-primary); }
         .case-card .case-desc { font-size:14px; color:var(--text-secondary); line-height:1.5; margin-bottom:16px; }
-        .case-card .case-result { display:inline-block; background:#ECFDF5; color:var(--green); padding:6px 14px; border-radius:50px; font-size:13px; font-weight:700; }
+        .case-card .case-result { display:inline-block; background:rgba(46,204,113,0.1); color:var(--green); padding:6px 14px; border-radius:50px; font-size:12px; font-weight:700; }
 
         /* ── Testimonials ── */
-        .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
-        .testimonial-card { background:var(--white); border-radius:16px; padding:28px; border:1px solid var(--border); position:relative; }
-        .testimonial-card .quote-mark { font-size:48px; color:var(--accent-blue); opacity:.4; line-height:1; font-family:Georgia,serif; }
-        .testimonial-card .quote-text { font-size:15px; line-height:1.6; color:var(--text-primary); margin-top:-20px; margin-bottom:20px; }
+        .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px; }
+        .testimonial-card { background:var(--surface); border-radius:var(--radius); padding:28px; border:1px solid var(--glass-border); }
+        .testimonial-card .quote-mark { font-size:40px; color:var(--accent); opacity:0.3; line-height:1; font-family:Georgia,serif; }
+        .testimonial-card .quote-text { font-size:15px; line-height:1.6; color:var(--text-primary); margin-top:-16px; margin-bottom:20px; }
         .testimonial-card .quote-author { display:flex; align-items:center; gap:12px; }
-        .testimonial-card .author-avatar { width:44px; height:44px; border-radius:50%; background:var(--card-bg); display:flex; align-items:center; justify-content:center; font-size:18px; }
-        .testimonial-card .author-info .author-name { font-size:14px; font-weight:700; }
-        .testimonial-card .author-info .author-role { font-size:13px; color:var(--text-muted); }
+        .testimonial-card .author-avatar { width:42px; height:42px; border-radius:50%; background:var(--glass); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:18px; }
+        .testimonial-card .author-info .author-name { font-size:14px; font-weight:700; color:var(--text-primary); }
+        .testimonial-card .author-info .author-role { font-size:12px; color:var(--text-muted); }
 
         /* ── FAQ ── */
-        .faq-list { max-width:800px; margin:40px auto 0; }
-        .faq-item { background:var(--white); border-radius:12px; margin-bottom:12px; overflow:hidden; border:1px solid var(--border); }
-        .faq-question { padding:20px 24px; font-size:16px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s; }
-        .faq-question:hover { background:var(--card-bg); }
-        .faq-question .arrow { font-size:20px; transition:transform .3s; color:var(--text-muted); }
-        .faq-item.open .faq-question .arrow { transform:rotate(180deg); }
+        .faq-list { max-width:760px; margin:40px auto 0; }
+        .faq-item { background:var(--surface); border-radius:var(--radius); margin-bottom:10px; overflow:hidden; border:1px solid var(--glass-border); transition:border-color .3s; }
+        .faq-item:hover { border-color:rgba(245,166,35,0.2); }
+        .faq-question { padding:20px 24px; font-size:16px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s; color:var(--text-primary); }
+        .faq-question:hover { color:var(--accent); }
+        .faq-question .arrow { font-size:18px; transition:transform .3s; color:var(--text-muted); }
+        .faq-item.open .faq-question .arrow { transform:rotate(180deg); color:var(--accent); }
         .faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
         .faq-item.open .faq-answer { max-height:300px; }
-        .faq-answer-inner { padding:0 24px 20px; font-size:15px; color:var(--text-secondary); line-height:1.6; }
+        .faq-answer-inner { padding:0 24px 20px; font-size:15px; color:var(--text-secondary); line-height:1.7; }
 
-        /* ── Test Badge ── */
-        .test-badge { position:absolute; top:40px; right:40px; background:var(--nav-active); color:var(--white); padding:16px 24px; border-radius:16px; text-align:center; z-index:10; }
-        .test-badge .label { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; display:flex; align-items:center; gap:8px; justify-content:center; }
-        .test-badge .value { font-size:16px; margin-top:4px; }
+        /* ── Stats Bar ── */
+        .stats-bar { display:flex; gap:48px; margin-top:40px; flex-wrap:wrap; }
+        .stat { }
+        .stat .stat-num { font-size:36px; font-weight:900; color:var(--accent); line-height:1; }
+        .stat .stat-label { font-size:13px; color:var(--text-muted); margin-top:4px; }
 
         /* ── Contact ── */
-        .contact-cards { display:flex; flex-direction:column; gap:16px; margin-top:32px; }
-        .contact-card { display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit; }
-        .contact-icon { width:56px; height:56px; background:var(--text-primary); border-radius:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-        .contact-icon svg { width:28px; height:28px; fill:var(--white); }
-        .contact-info .label { font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
-        .contact-info .value { font-size:18px; font-weight:700; }
+        .contact-cards { display:flex; flex-direction:column; gap:14px; margin-top:32px; }
+        .contact-card { display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit; padding:16px; background:var(--glass); border-radius:var(--radius); border:1px solid var(--glass-border); transition:all .3s; }
+        .contact-card:hover { background:var(--surface-hover); border-color:var(--accent); }
+        .contact-icon { width:48px; height:48px; background:var(--accent); border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .contact-icon svg { width:24px; height:24px; fill:#1A1207; }
+        .contact-info .label { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px; }
+        .contact-info .value { font-size:17px; font-weight:700; color:var(--text-primary); }
 
         /* ── Footer ── */
-        .footer { text-align:center; padding:40px 24px; font-size:14px; color:var(--text-muted); }
+        .footer { text-align:center; padding:48px 24px; font-size:14px; color:var(--text-muted); border-top:1px solid var(--glass-border); }
 
         /* ── Responsive ── */
         @media(max-width:1200px) {
-            .header { padding:20px 40px; }
-            .section { padding:100px 40px 60px; }
-            .section-full { padding:80px 40px 60px; }
-            .section-inner { gap:60px; }
-            .h1 { font-size:44px; }
-            .h2, .h2-center { font-size:52px; }
-            .pricing-grid { grid-template-columns:1fr; max-width:500px; margin:40px auto 0; }
+            .header { padding:16px 32px; }
+            .section { padding:100px 32px 60px; }
+            .section-full { padding:80px 32px 60px; }
+            .h1 { font-size:44px; } .h2, .h2-center { font-size:50px; }
+            .pricing-grid { grid-template-columns:1fr; max-width:480px; margin:40px auto 0; }
             .cases-grid { grid-template-columns:repeat(2,1fr); }
             .testimonials-grid { grid-template-columns:repeat(2,1fr); }
         }
         @media(max-width:900px) {
             .section-inner { grid-template-columns:1fr; gap:40px; }
             .image-card { max-width:500px; margin:0 auto; }
-            .nav { display:none; }
-            .menu-btn { display:flex; }
-            .h1 { font-size:36px; }
-            .h2, .h2-center { font-size:42px; }
-            .cases-grid, .testimonials-grid { grid-template-columns:1fr; max-width:500px; margin:30px auto 0; }
+            .nav { display:none; } .menu-btn { display:flex; }
+            .h1 { font-size:36px; } .h2, .h2-center { font-size:38px; }
+            .cases-grid, .testimonials-grid { grid-template-columns:1fr; max-width:480px; margin:30px auto 0; }
+            .stats-bar { gap:32px; }
         }
         @media(max-width:600px) {
-            .header { padding:16px 24px; }
-            .section { padding:80px 24px 40px; min-height:auto; }
-            .section-full { padding:60px 24px 40px; }
-            .h1 { font-size:28px; }
-            .h2, .h2-center { font-size:34px; }
-            .body-text { font-size:16px; }
-            .test-badge { position:relative; top:auto; right:auto; margin-bottom:24px; display:inline-block; }
-            .comparison-table td, .comparison-table th { padding:10px 8px; font-size:14px; }
+            .header { padding:14px 20px; }
+            .section { padding:80px 20px 40px; min-height:auto; }
+            .section-full { padding:60px 20px 40px; }
+            .h1 { font-size:30px; } .h2, .h2-center { font-size:32px; }
+            .comparison-table td, .comparison-table th { padding:10px 8px; font-size:13px; }
+            .stats-bar { gap:24px; }
+            .stat .stat-num { font-size:28px; }
         }
     </style>
 </head>
@@ -246,9 +268,7 @@
 
 <!-- Header -->
 <header class="header">
-    <div class="logo">
-        <span class="logo-top">VAcademy</span>
-    </div>
+    <div class="logo">VAcademy</div>
     <nav class="nav">
         <a href="#hero" class="active">Главная</a>
         <a href="#cases">Кейсы</a>
@@ -262,42 +282,49 @@
 
 <!-- 1. Hero -->
 <section id="hero" class="section">
-    <span class="asterisk" style="top:15%;right:35%">✦</span>
     <div class="section-inner">
         <div>
-            <h1 class="h1">Ваш ИИ-ассистент</h1>
-            <h2 class="h2">для бизнеса</h2>
-            <p class="body-text">Персональный помощник, который закрывает задачи программиста, дизайнера, аналитика и коуча. Работает прямо в вашем мессенджере 24/7.</p>
-            <a href="#pricing" class="cta-btn-dark">Тест-драйв 12 часов бесплатно</a>
+            <p class="subtitle">ИИ-АССИСТЕНТ ДЛЯ БИЗНЕСА</p>
+            <h1 class="h1">Один помощник —</h1>
+            <h2 class="h2">целая команда</h2>
+            <p class="body-text">Персональный AI-ассистент, который закрывает задачи программиста, дизайнера, аналитика и коуча. Работает в вашем мессенджере 24/7. Помнит контекст, обучается, генерирует файлы.</p>
+            <a href="#pricing" class="cta-gradient">Тест-драйв 12 часов бесплатно →</a>
             <div class="tags">
                 <span class="tag">● Telegram & WhatsApp</span>
                 <span class="tag">● Zoom обучение</span>
                 <span class="tag">● Комьюнити</span>
             </div>
+            <div class="stats-bar">
+                <div class="stat"><div class="stat-num">11+</div><div class="stat-label">клиентов</div></div>
+                <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">без выходных</div></div>
+                <div class="stat"><div class="stat-num">3–5ч</div><div class="stat-label">экономия в день</div></div>
+            </div>
         </div>
-        <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="ИИ-ассистент для бизнеса">
+        <div style="position:relative;">
+            <div class="image-glow"></div>
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="ИИ-ассистент для бизнеса">
+            </div>
         </div>
     </div>
 </section>
 
 <!-- 2. About -->
 <section id="about" class="section">
-    <span class="asterisk" style="top:10%;left:15%">✦</span>
     <div class="section-inner">
         <div>
-            <h1 class="h1">Что мы</h1>
-            <h2 class="h2">делаем?</h2>
             <p class="subtitle">КОМПЛЕКСНОЕ ВНЕДРЕНИЕ ИИ</p>
-            <p class="body-text" style="margin-bottom:24px">Мы разрабатываем индивидуального ассистента, который знает историю вашей компании, ваши цели и задачи. Помогаем управлять им, обучаем сотрудников и внедряем под ключ.</p>
-            <p class="body-text">Обучение в живом и записанном формате. Еженедельные Zoom-встречи с разбором вопросов. Чат-комьюнити для предпринимателей с уроками по настройке ассистента.</p>
-            <a href="#cases" class="cta-btn">
-                Кейсы клиентов
-                <span class="circle"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </a>
+            <h1 class="h1">Что мы</h1>
+            <h2 class="h2">делаем</h2>
+            <p class="body-text" style="margin-bottom:20px">Мы разрабатываем индивидуального ассистента, который знает историю вашей компании, цели и задачи. Помогаем управлять им, обучаем сотрудников и внедряем под ключ.</p>
+            <p class="body-text">Обучение в живом и записанном формате. Еженедельные Zoom-встречи с разбором вопросов. Чат-комьюнити для предпринимателей.</p>
+            <a href="#cases" class="cta-glass">Кейсы клиентов →</a>
         </div>
-        <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Внедрение ИИ">
+        <div style="position:relative;">
+            <div class="image-glow"></div>
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Внедрение ИИ">
+            </div>
         </div>
     </div>
 </section>
@@ -306,9 +333,9 @@
 <section id="who" class="section">
     <div class="section-inner">
         <div>
-            <h1 class="h1">Кому подходит</h1>
+            <p class="subtitle">КОМУ ПОДХОДИТ</p>
+            <h1 class="h1">Кому нужен</h1>
             <h2 class="h2">ИИ-ассистент?</h2>
-            <p class="subtitle">ОДИН ПОМОЩНИК ВМЕСТО ЦЕЛОЙ КОМАНДЫ</p>
             <div class="cards-list">
                 <div class="card-item">
                     <div class="card-icon blue">📋</div>
@@ -340,19 +367,20 @@
                 </div>
             </div>
         </div>
-        <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Кому подходит ИИ-ассистент">
+        <div style="position:relative;">
+            <div class="image-glow"></div>
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Кому подходит ИИ-ассистент">
+            </div>
         </div>
     </div>
 </section>
 
 <!-- 4. Cases -->
 <section id="cases" class="section section-full">
-    <span class="asterisk" style="top:10%;right:10%">✦</span>
     <div class="section-inner">
         <h1 class="h2-center">Кейсы клиентов</h1>
         <p class="subtitle-center">РЕАЛЬНЫЕ ЗАДАЧИ — РЕАЛЬНЫЕ РЕЗУЛЬТАТЫ</p>
-
         <div class="cases-grid">
             <div class="case-card">
                 <div class="case-emoji">🏗️</div>
@@ -365,7 +393,7 @@
                 <div class="case-emoji">🏨</div>
                 <div class="case-niche">Гостиничное оснащение, Сочи</div>
                 <div class="case-title">2 сайта + 3 презентации за неделю</div>
-                <div class="case-desc">Разработали сайты для двух компаний и подготовили презентации для инвесторов. База клиентов — 164 контакта в 12 категориях.</div>
+                <div class="case-desc">Разработали сайты для двух компаний и подготовили презентации для инвесторов. База клиентов — 164 контакта.</div>
                 <span class="case-result">💼 Неделя вместо месяца</span>
             </div>
             <div class="case-card">
@@ -379,7 +407,7 @@
                 <div class="case-emoji">👗</div>
                 <div class="case-niche">Дизайнерская одежда</div>
                 <div class="case-title">Статья для глянцевого журнала</div>
-                <div class="case-desc">Написали статью для профильного издания через 8 итераций с обратной связью. Подобрали обложку и визуал.</div>
+                <div class="case-desc">Написали статью для профильного издания через 8 итераций. Подобрали обложку и визуал.</div>
                 <span class="case-result">📝 Готово к публикации</span>
             </div>
             <div class="case-card">
@@ -402,12 +430,11 @@
 
 <!-- 5. Features -->
 <section id="features" class="section">
-    <span class="asterisk" style="top:20%;right:20%">✦</span>
     <div class="section-inner">
         <div>
+            <p class="subtitle">ЧТО ОТЛИЧАЕТ НАС ОТ CHATGPT</p>
             <h1 class="h1">Возможности</h1>
             <h2 class="h2">ассистента</h2>
-            <p class="subtitle">ЧТО ОТЛИЧАЕТ НАС ОТ CHATGPT</p>
             <table class="comparison-table">
                 <thead><tr><th></th><th>ChatGPT</th><th>Наш ассистент</th></tr></thead>
                 <tbody>
@@ -420,65 +447,29 @@
                 </tbody>
             </table>
             <div class="cards-list" style="margin-top:32px">
-                <div class="card-item">
-                    <div class="card-icon blue">📊</div>
-                    <div class="card-content">
-                        <h3>Финмодели и расчёты</h3>
-                        <p>Сметы, расчёты окупаемости, план продаж — за 10 минут вместо 2 дней</p>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon orange">🎬</div>
-                    <div class="card-content">
-                        <h3>Видео и Reels</h3>
-                        <p>Сценарии, озвучка, AI-аватары, видеомонтаж для соцсетей и рекламы</p>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon green">📄</div>
-                    <div class="card-content">
-                        <h3>Документы и договоры</h3>
-                        <p>КС-2/3, коммерческие предложения, юридические документы за минуты</p>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon purple">🌐</div>
-                    <div class="card-content">
-                        <h3>Сайты и приложения</h3>
-                        <p>Лендинги, интернет-магазины, MVP приложений — от идеи до запуска</p>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon blue">🔍</div>
-                    <div class="card-content">
-                        <h3>Аналитика и исследования</h3>
-                        <p>Анализ конкурентов, проверка цен, исследование рынка — с реальными данными</p>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon green">🖼</div>
-                    <div class="card-content">
-                        <h3>Дизайн и изображения</h3>
-                        <p>Презентации, баннеры, карточки товаров, обложки — в вашем бренд-стиле</p>
-                    </div>
-                </div>
+                <div class="card-item"><div class="card-icon blue">📊</div><div class="card-content"><h3>Финмодели и расчёты</h3><p>Сметы, расчёты окупаемости, план продаж — за 10 минут вместо 2 дней</p></div></div>
+                <div class="card-item"><div class="card-icon orange">🎬</div><div class="card-content"><h3>Видео и Reels</h3><p>Сценарии, озвучка, AI-аватары, видеомонтаж для соцсетей и рекламы</p></div></div>
+                <div class="card-item"><div class="card-icon green">📄</div><div class="card-content"><h3>Документы и договоры</h3><p>КС-2/3, коммерческие предложения, юридические документы за минуты</p></div></div>
+                <div class="card-item"><div class="card-icon purple">🌐</div><div class="card-content"><h3>Сайты и приложения</h3><p>Лендинги, интернет-магазины, MVP приложений — от идеи до запуска</p></div></div>
+                <div class="card-item"><div class="card-icon blue">🔍</div><div class="card-content"><h3>Аналитика и исследования</h3><p>Анализ конкурентов, проверка цен, исследование рынка — с реальными данными</p></div></div>
+                <div class="card-item"><div class="card-icon green">🖼</div><div class="card-content"><h3>Дизайн и изображения</h3><p>Презентации, баннеры, карточки товаров, обложки — в вашем бренд-стиле</p></div></div>
             </div>
         </div>
-        <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="Возможности ИИ-ассистента">
+        <div style="position:relative;">
+            <div class="image-glow"></div>
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="Возможности ИИ-ассистента">
+            </div>
         </div>
     </div>
 </section>
 
 <!-- 6. Pricing -->
 <section id="pricing" class="section section-full">
-    <span class="asterisk" style="top:8%;left:8%">✦</span>
     <div class="section-inner">
         <h1 class="h2-center">Тарифы</h1>
         <p class="subtitle-center">ВЫБЕРИТЕ СВОЙ ФОРМАТ РАБОТЫ</p>
-
         <div class="pricing-grid">
-            <!-- Tier 1: Start -->
             <div class="pricing-card">
                 <div class="tier-name">Старт</div>
                 <div class="tier-price">25 000 ₽</div>
@@ -494,8 +485,6 @@
                 </ul>
                 <a href="#contact" class="tier-cta outline">Выбрать Старт</a>
             </div>
-
-            <!-- Tier 2: Practika (Featured) -->
             <div class="pricing-card featured">
                 <div class="badge">⭐ Популярный</div>
                 <div class="tier-name">Практика</div>
@@ -510,10 +499,8 @@
                     <li>Интеграции с CRM и таблицами</li>
                     <li>Приоритетная поддержка</li>
                 </ul>
-                <a href="#contact" class="tier-cta dark">Выбрать Практику</a>
+                <a href="#contact" class="tier-cta solid">Выбрать Практику</a>
             </div>
-
-            <!-- Tier 3: Pod Klyuch -->
             <div class="pricing-card">
                 <div class="tier-name">Под ключ</div>
                 <div class="tier-price">200 000 ₽</div>
@@ -530,10 +517,9 @@
                 <a href="#contact" class="tier-cta outline">Обсудить проект</a>
             </div>
         </div>
-
         <div style="text-align:center; margin-top:40px;">
             <p style="font-size:15px; color:var(--text-secondary); margin-bottom:8px;">🎯 Не уверены, какой тариф подходит?</p>
-            <a href="#contact" style="font-size:15px; font-weight:700; color:var(--text-primary); text-decoration:underline;">Возьмите тест-драйв на 12 часов бесплатно →</a>
+            <a href="#contact" style="font-size:15px; font-weight:700; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:2px;">Возьмите тест-драйв на 12 часов бесплатно →</a>
         </div>
     </div>
 </section>
@@ -543,40 +529,21 @@
     <div class="section-inner">
         <h1 class="h2-center">Отзывы</h1>
         <p class="subtitle-center">ЧТО ГОВОРЯТ НАШИ КЛИЕНТЫ</p>
-
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="quote-mark">"</div>
                 <p class="quote-text">Закрыли пакет из 22 договоров за один день. Раньше на это уходила неделя. Ассистент знает специфику строительной документации и не требует объяснений каждый раз.</p>
-                <div class="quote-author">
-                    <div class="author-avatar">🏗️</div>
-                    <div class="author-info">
-                        <div class="author-name">Строительная компания</div>
-                        <div class="author-role">Курская область</div>
-                    </div>
-                </div>
+                <div class="quote-author"><div class="author-avatar">🏗️</div><div class="author-info"><div class="author-name">Строительная компания</div><div class="author-role">Курская область</div></div></div>
             </div>
             <div class="testimonial-card">
                 <div class="quote-mark">"</div>
                 <p class="quote-text">Два сайта и три презентации для инвесторов за неделю. Раньше нанимали студию — это занимало месяц и стоило в 5 раз дороже. Теперь ассистент — наш постоянный сотрудник.</p>
-                <div class="quote-author">
-                    <div class="author-avatar">🏨</div>
-                    <div class="author-info">
-                        <div class="author-name">Гостиничный бизнес</div>
-                        <div class="author-role">Сочи</div>
-                    </div>
-                </div>
+                <div class="quote-author"><div class="author-avatar">🏨</div><div class="author-info"><div class="author-name">Гостиничный бизнес</div><div class="author-role">Сочи</div></div></div>
             </div>
             <div class="testimonial-card">
                 <div class="quote-mark">"</div>
-                <p class="quote-text">Контент-план на месяц готов, AI-аватары снимают видеообращения для пациентов. Это новый уровень. Конкуренты до сих пор не понимают, как мы так быстро выкладываем контент.</p>
-                <div class="quote-author">
-                    <div class="author-avatar">🦷</div>
-                    <div class="author-info">
-                        <div class="author-name">Сеть стоматологий</div>
-                        <div class="author-role">Курск</div>
-                    </div>
-                </div>
+                <p class="quote-text">Контент-план на месяц готов, AI-аватары снимают видеообращения для пациентов. Конкуренты до сих пор не понимают, как мы так быстро выкладываем контент.</p>
+                <div class="quote-author"><div class="author-avatar">🦷</div><div class="author-info"><div class="author-name">Сеть стоматологий</div><div class="author-role">Курск</div></div></div>
             </div>
         </div>
     </div>
@@ -584,142 +551,63 @@
 
 <!-- 8. FAQ -->
 <section id="faq" class="section section-full">
-    <span class="asterisk" style="bottom:20%;right:10%">✦</span>
     <div class="section-inner">
         <h1 class="h2-center">Частые вопросы</h1>
         <p class="subtitle-center">ОТВЕЧАЕМ НА ГЛАВНОЕ</p>
-
         <div class="faq-list">
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Чем это отличается от ChatGPT?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    ChatGPT — универсальный чат, который забывает контекст после закрытия вкладки. Наш ассистент помнит ваш бизнес, клиентов, задачи и стиль работы. Он живёт в вашем Telegram, генерирует файлы, изображения и видео, обучается на каждом взаимодействии и работает 24/7 без подписки на зарубежные сервисы.
-                </div></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Нужно ли техническое образование?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    Нет. Вы общаетесь с ассистентом как с обычным сотрудником в мессенджере — текстом или голосом. Всю техническую настройку берём на себя. На еженедельных Zoom-встречах показываем, как получать максимум от ассистента.
-                </div></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Что входит в тест-драйв 12 часов?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    Полноценный доступ к ассистенту на 12 часов. Вы ставите реальные задачи — документы, контент, аналитику — и видите результат. Никаких демо-режимов: работаем с вашими данными и вашими задачами.
-                </div></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Безопасны ли мои данные?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    Да. Все данные хранятся на защищённом сервере. На тарифе «Под ключ» ассистент разворачивается полностью на вашей инфраструктуре — вы контролируете 100% данных. Мы не передаём информацию третьим лицам.
-                </div></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Сколько времени занимает настройка?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    Базовая настройка — 1–2 дня. Мы изучаем ваш бизнес, загружаем материалы, настраиваем стиль общения. Полная настройка под ключ занимает 1–2 недели, включая обучение команды и интеграцию с вашими сервисами.
-                </div></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Можно ли отменить подписку?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    Да, в любой момент. Подписка оплачивается помесячно, без долгосрочных контрактов. На тарифе «Под ключ» ассистент остаётся у вас навсегда — даже если вы перестанете пользоваться нашей поддержкой.
-                </div></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    Какие мессенджеры поддерживаются?
-                    <span class="arrow">⌄</span>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-inner">
-                    Telegram и WhatsApp. Ассистент работает в том мессенджере, который удобен вам и вашей команде. Можно подключить несколько сотрудников одновременно — у каждого свой доступ и свои задачи.
-                </div></div>
-            </div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Чем это отличается от ChatGPT?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">ChatGPT — универсальный чат, который забывает контекст после закрытия вкладки. Наш ассистент помнит ваш бизнес, клиентов, задачи и стиль работы. Он живёт в вашем Telegram, генерирует файлы, изображения и видео, обучается на каждом взаимодействии и работает 24/7 без подписки на зарубежные сервисы.</div></div></div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Нужно ли техническое образование?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">Нет. Вы общаетесь с ассистентом как с обычным сотрудником в мессенджере — текстом или голосом. Всю техническую настройку берём на себя. На еженедельных Zoom-встречах показываем, как получать максимум от ассистента.</div></div></div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Что входит в тест-драйв 12 часов?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">Полноценный доступ к ассистенту на 12 часов. Вы ставите реальные задачи — документы, контент, аналитику — и видите результат. Никаких демо-режимов: работаем с вашими данными и вашими задачами.</div></div></div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Безопасны ли мои данные?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">Да. Все данные хранятся на защищённом сервере. На тарифе «Под ключ» ассистент разворачивается полностью на вашей инфраструктуре — вы контролируете 100% данных. Мы не передаём информацию третьим лицам.</div></div></div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Сколько времени занимает настройка?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">Базовая настройка — 1–2 дня. Полная настройка под ключ занимает 1–2 недели, включая обучение команды и интеграцию с вашими сервисами.</div></div></div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Можно ли отменить подписку?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">Да, в любой момент. Подписка оплачивается помесячно, без долгосрочных контрактов. На тарифе «Под ключ» ассистент остаётся у вас навсегда.</div></div></div>
+            <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Какие мессенджеры поддерживаются?<span class="arrow">⌄</span></div><div class="faq-answer"><div class="faq-answer-inner">Telegram и WhatsApp. Ассистент работает в том мессенджере, который удобен вам. Можно подключить несколько сотрудников одновременно.</div></div></div>
         </div>
     </div>
 </section>
 
 <!-- 9. Contact -->
 <section id="contact" class="section">
-    <span class="asterisk" style="top:15%;right:15%">✦</span>
-    <span class="asterisk" style="bottom:25%;left:10%">✦</span>
     <div class="section-inner">
         <div>
-            <h1 class="h1">Готовы начать?</h1>
-            <h2 class="h2">Контакты</h2>
-            <p class="body-text" style="margin-bottom:16px">Возьмите тест-драйв на 12 часов бесплатно — и решите сами.</p>
-            <p class="body-text" style="font-weight:700;font-size:20px">Удачного дня!</p>
+            <p class="subtitle">НАЧНИТЕ СЕГОДНЯ</p>
+            <h1 class="h1">Готовы</h1>
+            <h2 class="h2">начать?</h2>
+            <p class="body-text" style="margin-bottom:8px">Возьмите тест-драйв на 12 часов бесплатно — и решите сами.</p>
             <div class="contact-cards">
-                <a href="tel:+79202669966" class="contact-card">
-                    <div class="contact-icon">
-                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></svg>
-                    </div>
-                    <div class="contact-info">
-                        <div class="label">Телефон</div>
-                        <div class="value">+7 (920) 266-99-66</div>
-                    </div>
+                <a href="tel:+792****9966" class="contact-card">
+                    <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></svg></div>
+                    <div class="contact-info"><div class="label">Телефон</div><div class="value">+7 (920) 266-99-66</div></div>
                 </a>
                 <a href="https://t.me/vardges" class="contact-card" target="_blank">
-                    <div class="contact-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.2-.04-.28-.02-.12.02-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.5 1.04-.78 4.07-1.77 6.79-2.94 8.15-3.5 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/></svg>
-                    </div>
-                    <div class="contact-info">
-                        <div class="label">Telegram</div>
-                        <div class="value">@vardges</div>
-                    </div>
+                    <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.2-.04-.28-.02-.12.02-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.5 1.04-.78 4.07-1.77 6.79-2.94 8.15-3.5 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/></svg></div>
+                    <div class="contact-info"><div class="label">Telegram</div><div class="value">@vardges</div></div>
                 </a>
                 <a href="https://t.me/vardges" class="contact-card" target="_blank">
-                    <div class="contact-icon">
-                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                    </div>
-                    <div class="contact-info">
-                        <div class="label">Комьюнити</div>
-                        <div class="value">Чат для предпринимателей</div>
-                    </div>
+                    <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+                    <div class="contact-info"><div class="label">Комьюнити</div><div class="value">Чат для предпринимателей</div></div>
                 </a>
             </div>
         </div>
-        <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80" alt="Связаться с VAcademy">
+        <div style="position:relative;">
+            <div class="image-glow"></div>
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80" alt="Связаться с VAcademy">
+            </div>
         </div>
     </div>
 </section>
 
 <footer class="footer">© 2026 VAcademy — ИИ-ассистенты</footer>
 
-<!-- Active Nav Highlight -->
 <script>
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav a');
 window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 200) current = s.id;
-    });
-    navLinks.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
-    });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+    navLinks.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + current) a.classList.add('active'); });
 });
 </script>
-
 </body>
 </html>
